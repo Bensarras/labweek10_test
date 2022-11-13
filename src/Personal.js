@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import './Form.css';
+
 
 const INITIAL_VALUE = {
     fullname: "",
@@ -21,11 +22,12 @@ const INITIAL_VALUE = {
 // }
 
 
+
 export default class Personal extends React.Component{
     constructor(props){
         super(props)
         
-        this.state = {...INITIAL_VALUE}
+        this.state = {INITIAL_VALUE}
         this.cities = ["[--SELECT CITY--]", "Toronto", "Quebec", "Vancuber", "Calgary", "Ottawa"]
         this.province = ["[--SELECT province--]", "Ontario", "Quebec", "Alberta", "Nova scotia"]
     }
@@ -41,10 +43,14 @@ export default class Personal extends React.Component{
         INITIAL_VALUE.postalCode= this.state.postalCode
         
         console.log(INITIAL_VALUE)
+        this.forceUpdate()
+        
+        
     
 
         //console.log(event.target)
     }
+    
 
     clearForm = (event) => {
         event.preventDefault()
@@ -55,13 +61,15 @@ export default class Personal extends React.Component{
         ///console.log(event.target.value)
 
         this.setState({[event.target.name]: event.target.value})
+       
     }
+   
 
     render= () => {
         return(
             <>
                 <h1>Personal info FORM Lab10</h1>
-                <form>
+                <form onSubmit={this.onSubmitLogin}>
                     <input 
                         type="text" 
                         name="fullname" 
@@ -110,8 +118,8 @@ export default class Personal extends React.Component{
                         type="submit" 
                         name="btnSubmit" 
                         value="Sumbit form" 
-                        onClick={this.onSubmitLogin} />
-                        <div>
+                         />
+                    <div>
                     <h1>email : {INITIAL_VALUE.email}</h1>
                     <h1>fullname : {INITIAL_VALUE.fullname}</h1>
                     <h1>address : {INITIAL_VALUE.address1}</h1>
@@ -119,8 +127,11 @@ export default class Personal extends React.Component{
                     <h1>city: {INITIAL_VALUE.city}</h1>
                     <h1>province : {INITIAL_VALUE.province}</h1>
                     <h1>postalCode : {INITIAL_VALUE.postalCode}</h1>
+                    
                     </div>
                 </form>
+
+                
                 
                 
                 
